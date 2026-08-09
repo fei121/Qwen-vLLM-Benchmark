@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">延迟分布对比</title>
+<desc id="desc">双卡显著降低TTFT长尾，并稳定改善TPOT；ITL P99改善较小。</desc>
+<rect width="1200" height="760" fill="#FFFFFF"/>
+<text x="64" y="62" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="30" font-weight="750" fill="#0F172A" text-anchor="start" opacity="1.0">双卡显著收敛首 token 长尾</text>
+<text x="64" y="94" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">TTFT 使用对数轴；TPOT 与 ITL 使用线性轴。柱顶标注原始值</text>
+<line x1="64" y1="116" x2="1136" y2="116" stroke="#E2E8F0" stroke-width="1"/>
+<circle cx="850" cy="86" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="0"/>
+<text x="864" y="91" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="14" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">PRO 6000 ×1</text>
+<circle cx="998" cy="86" r="6" fill="#F97316" stroke="#F97316" stroke-width="0"/>
+<text x="1012" y="91" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="14" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">PRO 6000 ×2</text>
+<rect x="64" y="154" width="338" height="520" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="86" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="650" fill="#0F172A" text-anchor="start" opacity="1.0">TTFT · 首 token 延迟</text>
+<line x1="122" y1="624.0" x2="380" y2="624.0" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="113" y="628.0" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">100</text>
+<line x1="122" y1="421.5" x2="380" y2="421.5" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="113" y="425.5" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">1s</text>
+<line x1="122" y1="219.0" x2="380" y2="219.0" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="113" y="223.0" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">10s</text>
+<rect x="144.07999999999998" y="476.4886354537232" width="18.92" height="147.5113645462768" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="153.54" y="468.4886354537232" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">535.1</text>
+<rect x="167.0" y="550.0759127948191" width="18.92" height="73.92408720518085" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="176.46" y="542.0759127948191" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">231.8</text>
+<text x="165.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">均值</text>
+<rect x="230.07999999999998" y="572.4735924426342" width="18.92" height="51.526407557365815" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="239.54" y="564.4735924426342" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">179.7</text>
+<rect x="253.0" y="586.1985418313016" width="18.92" height="37.801458168698446" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="262.46" y="578.1985418313016" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">153.7</text>
+<text x="251.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">中位数</text>
+<rect x="316.08" y="259.8739698992408" width="18.92" height="364.1260301007592" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="325.53999999999996" y="251.87396989924082" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">6.28s</text>
+<rect x="339.0" y="367.3982003760668" width="18.92" height="256.6017996239332" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="348.46" y="359.3982003760668" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">1.85s</text>
+<text x="337.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">P99</text>
+<text x="380" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">ms · 对数轴</text>
+<rect x="431" y="154" width="338" height="520" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="453" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="650" fill="#0F172A" text-anchor="start" opacity="1.0">TPOT · 每输出 token</text>
+<line x1="489" y1="624.0" x2="747" y2="624.0" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="480" y="628.0" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">0</text>
+<line x1="489" y1="421.5" x2="747" y2="421.5" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="480" y="425.5" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">20</text>
+<line x1="489" y1="219.0" x2="747" y2="219.0" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="480" y="223.0" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">40</text>
+<rect x="511.08" y="492.1725" width="18.92" height="131.8275" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="520.54" y="484.1725" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">13.0</text>
+<rect x="534.0" y="527.61" width="18.92" height="96.38999999999999" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="543.46" y="519.61" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">9.5</text>
+<text x="532.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">均值</text>
+<rect x="597.08" y="498.34875" width="18.92" height="125.65125" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="606.5400000000001" y="490.34875" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">12.4</text>
+<rect x="620.0" y="530.85" width="18.92" height="93.14999999999998" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="629.46" y="522.85" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">9.2</text>
+<text x="618.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">中位数</text>
+<rect x="683.08" y="342.3225" width="18.92" height="281.6775" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="692.5400000000001" y="334.3225" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">27.8</text>
+<rect x="706.0" y="418.26" width="18.92" height="205.74" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="715.46" y="410.26" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">20.3</text>
+<text x="704.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">P99</text>
+<text x="747" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">ms</text>
+<rect x="798" y="154" width="338" height="520" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="820" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="650" fill="#0F172A" text-anchor="start" opacity="1.0">ITL · token 间隔</text>
+<line x1="856" y1="624.0" x2="1114" y2="624.0" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="847" y="628.0" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">0</text>
+<line x1="856" y1="421.5" x2="1114" y2="421.5" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="847" y="425.5" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">75</text>
+<line x1="856" y1="219.0" x2="1114" y2="219.0" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 5"/>
+<text x="847" y="223.0" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">150</text>
+<rect x="878.08" y="540.192" width="18.92" height="83.80799999999999" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="887.5400000000001" y="532.192" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">31.0</text>
+<rect x="901.0" y="561.144" width="18.92" height="62.855999999999995" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="910.46" y="553.144" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">23.3</text>
+<text x="899.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">均值</text>
+<rect x="964.08" y="550.776" width="18.92" height="73.22400000000005" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="973.5400000000001" y="542.776" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">27.1</text>
+<rect x="987.0" y="572.025" width="18.92" height="51.97500000000002" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="996.46" y="564.025" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">19.2</text>
+<text x="985.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">中位数</text>
+<rect x="1050.08" y="289.524" width="18.92" height="334.476" rx="3" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="1059.54" y="281.524" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">123.9</text>
+<rect x="1073.0" y="311.15099999999995" width="18.92" height="312.84900000000005" rx="3" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="1082.46" y="303.15099999999995" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="11" font-weight="650" fill="#0F172A" text-anchor="middle" opacity="1.0">115.9</text>
+<text x="1071.0" y="651" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">P99</text>
+<text x="1114" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">ms</text>
+<text x="64" y="718" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="14" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">P99 TTFT：6.28s → 1.85s（−70.6%）   ·   P99 ITL：123.88ms → 115.87ms（−6.5%）</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">扩展效率与资源成本</title>
+<desc id="desc">双卡加速1.384倍，并行效率69.2%，每百万输出token的GPU时间增加44.5%。</desc>
+<rect width="1200" height="650" fill="#FFFFFF"/>
+<text x="64" y="62" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="30" font-weight="750" fill="#0F172A" text-anchor="start" opacity="1.0">双卡买来容量与尾延迟，但不是线性扩展</text>
+<text x="64" y="94" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">加速比衡量完成同一工作量的速度；GPU·秒是资源占用代理，不等同于电费</text>
+<line x1="64" y1="116" x2="1136" y2="116" stroke="#E2E8F0" stroke-width="1"/>
+<text x="64" y="167" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="650" fill="#0F172A" text-anchor="start" opacity="1.0">输出吞吐加速比</text>
+<line x1="64" y1="235" x2="720" y2="235" stroke="#E2E8F0" stroke-width="8"/>
+<line x1="64.0" y1="227" x2="64.0" y2="243" stroke="#64748B" stroke-width="1"/>
+<text x="64.0" y="268" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">0×</text>
+<line x1="228.0" y1="227" x2="228.0" y2="243" stroke="#64748B" stroke-width="1"/>
+<text x="228.0" y="268" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">0.5×</text>
+<line x1="392.0" y1="227" x2="392.0" y2="243" stroke="#64748B" stroke-width="1"/>
+<text x="392.0" y="268" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">1×</text>
+<line x1="556.0" y1="227" x2="556.0" y2="243" stroke="#64748B" stroke-width="1"/>
+<text x="556.0" y="268" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">1.5×</text>
+<line x1="720.0" y1="227" x2="720.0" y2="243" stroke="#64748B" stroke-width="1"/>
+<text x="720.0" y="268" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">2×</text>
+<line x1="64" y1="235" x2="518.0175801162823" y2="235" stroke="#F97316" stroke-width="8"/>
+<circle cx="518.0175801162823" cy="235" r="10" fill="#F97316" stroke="#FFFFFF" stroke-width="3"/>
+<text x="518.0175801162823" y="210" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="750" fill="#0F172A" text-anchor="middle" opacity="1.0">实测 1.384×</text>
+<text x="720" y="210" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="14" font-weight="400" fill="#64748B" text-anchor="end" opacity="1.0">理想 2.000×</text>
+<rect x="785" y="154" width="351" height="142" rx="8" fill="#FFEDD5" stroke="none" stroke-width="1"/>
+<text x="809" y="188" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="600" fill="#64748B" text-anchor="start" opacity="1.0">双卡并行效率</text>
+<text x="809" y="247" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="48" font-weight="800" fill="#F97316" text-anchor="start" opacity="1.0">69.2%</text>
+<text x="809" y="275" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">= 1.384× ÷ 2 GPUs</text>
+<text x="64" y="360" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="650" fill="#0F172A" text-anchor="start" opacity="1.0">每 100 万输出 tokens 的 GPU 时间</text>
+<text x="64" y="430" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">单卡</text>
+<rect x="250" y="407" width="730" height="32" rx="4" fill="#F1F5F9" stroke="none" stroke-width="1"/>
+<rect x="250" y="407" width="451.10836230096436" height="32" rx="4" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="689.1083623009644" y="429" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="end" opacity="1.0">688.9 GPU·s</text>
+<text x="64" y="512" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">双卡</text>
+<rect x="250" y="489" width="730" height="32" rx="4" fill="#F1F5F9" stroke="none" stroke-width="1"/>
+<rect x="250" y="489" width="651.7857142857142" height="32" rx="4" fill="#F97316" stroke="none" stroke-width="1"/>
+<text x="889.7857142857142" y="511" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="end" opacity="1.0">995.3 GPU·s</text>
+<rect x="1003" y="406" width="133" height="115" rx="8" fill="#FFEDD5" stroke="none" stroke-width="1"/>
+<text x="1069" y="437" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">资源占用</text>
+<text x="1069" y="477" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="25" font-weight="800" fill="#F97316" text-anchor="middle" opacity="1.0">+44.5%</text>
+<text x="1069" y="502" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="12" font-weight="400" fill="#64748B" text-anchor="middle" opacity="1.0">双卡 vs 单卡</text>
+<text x="64" y="600" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="600" fill="#0F172A" text-anchor="start" opacity="1.0">决策含义：双卡适合追求更高容量与更低 P99；单卡的单位 GPU 产出更高。</text>
+</svg>
