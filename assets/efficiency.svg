@@ -3,7 +3,7 @@
 <desc id="desc">双卡加速1.384倍，并行效率69.2%，每百万输出token的GPU时间增加44.5%。</desc>
 <rect width="1200" height="650" fill="#FFFFFF"/>
 <text x="64" y="62" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="30" font-weight="750" fill="#0F172A" text-anchor="start" opacity="1.0">双卡买来容量与尾延迟，但不是线性扩展</text>
-<text x="64" y="94" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">加速比衡量完成同一工作量的速度；GPU·秒是资源占用代理，不等同于电费</text>
+<text x="64" y="94" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="15" font-weight="400" fill="#64748B" text-anchor="start" opacity="1.0">35B-A3B 模型 · 加速比衡量完成同一工作量的速度；GPU·秒是资源占用代理，不等同于电费</text>
 <line x1="64" y1="116" x2="1136" y2="116" stroke="#E2E8F0" stroke-width="1"/>
 <text x="64" y="167" font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="17" font-weight="650" fill="#0F172A" text-anchor="start" opacity="1.0">输出吞吐加速比</text>
 <line x1="64" y1="235" x2="720" y2="235" stroke="#E2E8F0" stroke-width="8"/>

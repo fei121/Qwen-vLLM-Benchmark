@@ -3,6 +3,11 @@
 
 No third-party Python dependencies are required. The output is deterministic,
 keeps a pure-white canvas, and remains editable as SVG text.
+
+Rows may describe different models and card counts (e.g. a 3B-active MoE model
+on one/two GPUs vs a dense model on one GPU). Charts that reason about "more
+cards" compare the same model across card counts; the model-selection chart
+compares models on the same card count.
 """
 
 from __future__ import annotations
@@ -27,15 +32,23 @@ ORANGE_LIGHT = "#FFEDD5"
 GREEN = "#059669"
 GREEN_LIGHT = "#D1FAE5"
 RED = "#DC2626"
+TEAL = "#0D9488"
+TEAL_LIGHT = "#CCFBF1"
 WHITE = "#FFFFFF"
 FONT = "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif"
+
+# Short labels used across charts. "MoE" is inferred from the model id (A3B).
+MODEL35 = "qwen3.6-35b-a3b-fp8"   # 35B total / 3B active (MoE)
+MODEL27 = "qwen3.8-27b-fp8"       # dense 27B FP8
+L35 = "35B-A3B"
+L27 = "27B"
 
 
 def load_rows() -> list[dict[str, str]]:
     with DATA.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    if len(rows) != 2:
-        raise ValueError(f"expected exactly 2 configurations, got {len(rows)}")
+    if len(rows) < 2:
+        raise ValueError(f"expected at least 2 configurations, got {len(rows)}")
     return rows
 
 
@@ -90,11 +103,19 @@ def title_block(svg: SVG, title: str, subtitle: str):
     svg.line(64, 116, svg.width - 64, 116, stroke=GRID)
 
 
-def legend(svg: SVG, x: int, y: int):
-    svg.circle(x, y - 5, 6, BLUE, stroke=BLUE, stroke_width=0)
-    svg.text(x + 14, y, "PRO 6000 ×1", size=14, fill=MUTED)
-    svg.circle(x + 148, y - 5, 6, ORANGE, stroke=ORANGE, stroke_width=0)
-    svg.text(x + 162, y, "PRO 6000 ×2", size=14, fill=MUTED)
+def legend(svg: SVG, x: int, y: int, items: list[tuple[str, str]], gap: int = 150):
+    cx = x
+    for label, color in items:
+        svg.circle(cx, y - 5, 6, color, stroke=color, stroke_width=0)
+        svg.text(cx + 14, y, label, size=14, fill=MUTED)
+        cx += gap
+
+
+# --- single vs dual-card charts (same model: 35B-A3B) ----------------------
+SINGLE_LABEL = f"{L35} ×1"
+DUAL_LABEL = f"{L35} ×2"
+SINGLE_BAR = f"{L35} 单卡"
+DUAL_BAR = f"{L35} 双卡"
 
 
 def mini_bar_panel(svg: SVG, x: int, y: int, w: int, h: int, label: str,
@@ -117,36 +138,16 @@ def mini_bar_panel(svg: SVG, x: int, y: int, w: int, h: int, label: str,
         bh = chart_h * value / max_v
         svg.rect(cx - bar_w / 2, baseline - bh, bar_w, bh, fill=color, radius=4)
         svg.text(cx, baseline - bh - 13, formatter(value), size=17, weight=700, anchor="middle")
-        svg.text(cx, baseline + 28, "单卡" if idx == 0 else "双卡", size=14, fill=MUTED, anchor="middle")
-
-
-def chart_throughput(a, b):
-    svg = SVG(1200, 650, "吞吐与完成时间对比", "双卡提升吞吐约38%，测试时长缩短约28%。")
-    title_block(svg, "同一工作量下，双卡把服务能力提升约四成", "300 请求 · 并发 20 · 每请求 4,096 输入 + 1,024 输出 tokens")
-    mini_bar_panel(
-        svg, 64, 154, 338, 420, "输出吞吐 · tok/s",
-        (n(a, "output_throughput_tps"), n(b, "output_throughput_tps")),
-        lambda v: f"{v:,.0f}", f"+{pct(n(a, 'output_throughput_tps'), n(b, 'output_throughput_tps')):.1f}%"
-    )
-    mini_bar_panel(
-        svg, 431, 154, 338, 420, "请求吞吐 · req/s",
-        (n(a, "request_throughput_rps"), n(b, "request_throughput_rps")),
-        lambda v: f"{v:.2f}", f"+{pct(n(a, 'request_throughput_rps'), n(b, 'request_throughput_rps')):.1f}%"
-    )
-    mini_bar_panel(
-        svg, 798, 154, 338, 420, "完成时间 · 秒",
-        (n(a, "duration_s"), n(b, "duration_s")),
-        lambda v: f"{v:.1f}", f"{pct(n(a, 'duration_s'), n(b, 'duration_s')):.1f}%", higher_is_better=False
-    )
-    svg.text(64, 620, "值越高越好：吞吐   ·   值越低越好：完成时间", size=13, fill=MUTED)
-    svg.finish(ASSETS / "throughput.svg")
+        svg.text(cx, baseline + 28, SINGLE_BAR if idx == 0 else DUAL_BAR, size=14, fill=MUTED, anchor="middle")
 
 
 def grouped_latency_panel(svg: SVG, x: int, y: int, w: int, h: int, name: str,
-                          keys: tuple[str, str, str], log_scale: bool = False):
+                          keys: tuple[str, str, str], rows: tuple[dict, dict],
+                          log_scale: bool = False):
     svg.rect(x, y, w, h, fill=WHITE, stroke=GRID, radius=8)
     svg.text(x + 22, y + 34, name, size=17, weight=650)
-    values = [n(row, key) for key in keys for row in (ROWS[0], ROWS[1])]
+    a, b = rows
+    values = [n(row, key) for key in keys for row in (a, b)]
     chart_left, chart_right = x + 58, x + w - 22
     chart_top, chart_bottom = y + 65, y + h - 50
     if log_scale:
@@ -169,7 +170,7 @@ def grouped_latency_panel(svg: SVG, x: int, y: int, w: int, h: int, name: str,
     bar_w = min(28, group_w * 0.22)
     for gi, (group, key) in enumerate(zip(groups, keys)):
         center = chart_left + group_w * (gi + 0.5)
-        for ri, (row, color) in enumerate(zip(ROWS, (BLUE, ORANGE))):
+        for ri, (row, color) in enumerate(zip((a, b), (BLUE, ORANGE))):
             value = n(row, key)
             bx = center + (-bar_w - 2 if ri == 0 else 2)
             by = scale(value)
@@ -181,13 +182,35 @@ def grouped_latency_panel(svg: SVG, x: int, y: int, w: int, h: int, name: str,
     svg.text(x + w - 22, y + 34, unit, size=12, fill=MUTED, anchor="end")
 
 
+def chart_throughput(a, b):
+    svg = SVG(1200, 650, "吞吐与完成时间对比", "同为35B-A3B模型，双卡提升吞吐约38%，测试时长缩短约28%。")
+    title_block(svg, "同一工作量下，双卡把服务能力提升约四成", "35B-A3B · 300 请求 · 并发 20 · 每请求 4,096 输入 + 1,024 输出 tokens")
+    mini_bar_panel(
+        svg, 64, 154, 338, 420, "输出吞吐 · tok/s",
+        (n(a, "output_throughput_tps"), n(b, "output_throughput_tps")),
+        lambda v: f"{v:,.0f}", f"+{pct(n(a, 'output_throughput_tps'), n(b, 'output_throughput_tps')):.1f}%"
+    )
+    mini_bar_panel(
+        svg, 431, 154, 338, 420, "请求吞吐 · req/s",
+        (n(a, "request_throughput_rps"), n(b, "request_throughput_rps")),
+        lambda v: f"{v:.2f}", f"+{pct(n(a, 'request_throughput_rps'), n(b, 'request_throughput_rps')):.1f}%"
+    )
+    mini_bar_panel(
+        svg, 798, 154, 338, 420, "完成时间 · 秒",
+        (n(a, "duration_s"), n(b, "duration_s")),
+        lambda v: f"{v:.1f}", f"{pct(n(a, 'duration_s'), n(b, 'duration_s')):.1f}%", higher_is_better=False
+    )
+    svg.text(64, 620, "值越高越好：吞吐   ·   值越低越好：完成时间", size=13, fill=MUTED)
+    svg.finish(ASSETS / "throughput.svg")
+
+
 def chart_latency(a, b):
     svg = SVG(1200, 760, "延迟分布对比", "双卡显著降低TTFT长尾，并稳定改善TPOT；ITL P99改善较小。")
-    title_block(svg, "双卡显著收敛首 token 长尾", "TTFT 使用对数轴；TPOT 与 ITL 使用线性轴。柱顶标注原始值")
-    legend(svg, 850, 91)
-    grouped_latency_panel(svg, 64, 154, 338, 520, "TTFT · 首 token 延迟", ("ttft_mean_ms", "ttft_median_ms", "ttft_p99_ms"), True)
-    grouped_latency_panel(svg, 431, 154, 338, 520, "TPOT · 每输出 token", ("tpot_mean_ms", "tpot_median_ms", "tpot_p99_ms"), False)
-    grouped_latency_panel(svg, 798, 154, 338, 520, "ITL · token 间隔", ("itl_mean_ms", "itl_median_ms", "itl_p99_ms"), False)
+    title_block(svg, "双卡显著收敛首 token 长尾", "35B-A3B 模型 · TTFT 使用对数轴；TPOT 与 ITL 使用线性轴。柱顶标注原始值")
+    legend(svg, 850, 91, [(SINGLE_LABEL, BLUE), (DUAL_LABEL, ORANGE)])
+    grouped_latency_panel(svg, 64, 154, 338, 520, "TTFT · 首 token 延迟", ("ttft_mean_ms", "ttft_median_ms", "ttft_p99_ms"), (a, b), True)
+    grouped_latency_panel(svg, 431, 154, 338, 520, "TPOT · 每输出 token", ("tpot_mean_ms", "tpot_median_ms", "tpot_p99_ms"), (a, b), False)
+    grouped_latency_panel(svg, 798, 154, 338, 520, "ITL · token 间隔", ("itl_mean_ms", "itl_median_ms", "itl_p99_ms"), (a, b), False)
     svg.text(64, 718, "P99 TTFT：6.28s → 1.85s（−70.6%）   ·   P99 ITL：123.88ms → 115.87ms（−6.5%）", size=14, fill=MUTED)
     svg.finish(ASSETS / "latency.svg")
 
@@ -198,7 +221,7 @@ def chart_efficiency(a, b):
     gpu_s_single = n(a, "gpu_count") * n(a, "duration_s") / n(a, "total_generated_tokens") * 1_000_000
     gpu_s_dual = n(b, "gpu_count") * n(b, "duration_s") / n(b, "total_generated_tokens") * 1_000_000
     svg = SVG(1200, 650, "扩展效率与资源成本", "双卡加速1.384倍，并行效率69.2%，每百万输出token的GPU时间增加44.5%。")
-    title_block(svg, "双卡买来容量与尾延迟，但不是线性扩展", "加速比衡量完成同一工作量的速度；GPU·秒是资源占用代理，不等同于电费")
+    title_block(svg, "双卡买来容量与尾延迟，但不是线性扩展", "35B-A3B 模型 · 加速比衡量完成同一工作量的速度；GPU·秒是资源占用代理，不等同于电费")
 
     # Speedup scale
     svg.text(64, 167, "输出吞吐加速比", size=17, weight=650)
@@ -242,8 +265,8 @@ def chart_efficiency(a, b):
 
 def chart_speculative(a, b):
     svg = SVG(1200, 620, "投机解码接受率对比", "双卡运行的总体、位置0和位置1接受率均略高。")
-    title_block(svg, "双卡运行的投机接受率高 3.07 个百分点", "接受率变化可能受调度与请求序列影响；需要重复试验和关闭投机解码的消融对照")
-    legend(svg, 850, 91)
+    title_block(svg, "双卡运行的投机接受率高 3.07 个百分点", "35B-A3B 模型 · 接受率变化可能受调度与请求序列影响；需要重复试验和关闭投机解码的消融对照")
+    legend(svg, 850, 91, [(SINGLE_LABEL, BLUE), (DUAL_LABEL, ORANGE)])
     metrics = [
         ("总体接受率", "spec_acceptance_rate_pct"),
         ("Position 0", "spec_position_0_pct"),
@@ -280,27 +303,95 @@ def chart_speculative(a, b):
     svg.finish(ASSETS / "speculative.svg")
 
 
-def validate(a, b):
-    assert int(n(a, "total_input_tokens") / n(a, "successful_requests")) == 4096
-    assert int(n(a, "total_generated_tokens") / n(a, "successful_requests")) == 1024
-    assert abs(n(a, "output_throughput_tps") - n(a, "total_generated_tokens") / n(a, "duration_s")) < 0.1
-    assert abs(n(b, "output_throughput_tps") - n(b, "total_generated_tokens") / n(b, "duration_s")) < 0.1
-    assert abs(pct(n(a, "duration_s"), n(b, "duration_s")) - (-27.7582)) < 0.01
-    assert abs(pct(n(a, "ttft_p99_ms"), n(b, "ttft_p99_ms")) - (-70.5547)) < 0.01
-    assert abs((n(b, "output_throughput_tps") / n(a, "output_throughput_tps") / 2) - 0.6921) < 0.001
+# --- model comparison chart (different models, same workload) -------------
+def tri_bar_panel(svg: SVG, x: int, y: int, w: int, h: int, name: str, unit: str,
+                  items: list[tuple[str, float, str]], formatter):
+    svg.rect(x, y, w, h, fill=WHITE, stroke=GRID, radius=8)
+    svg.text(x + 22, y + 34, name, size=16, weight=650)
+    svg.text(x + w - 22, y + 34, unit, size=12, fill=MUTED, anchor="end")
+    values = [v for _, v, _ in items]
+    chart_left, chart_right = x + 46, x + w - 26
+    chart_top, chart_bottom = y + 62, y + h - 46
+    max_v = max(values) * 1.16
+    for frac in (0, 0.5, 1):
+        gy = chart_bottom - (chart_bottom - chart_top) * frac
+        svg.line(chart_left, gy, chart_right, gy, stroke=GRID, dash="3 5" if frac else None)
+    group_w = (chart_right - chart_left) / 3
+    bar_w = min(72, group_w * 0.5)
+    for gi, (label, value, color) in enumerate(items):
+        center = chart_left + group_w * (gi + 0.5)
+        bh = (chart_bottom - chart_top) * value / max_v
+        svg.rect(center - bar_w / 2, chart_bottom - bh, bar_w, bh, fill=color, radius=4)
+        svg.text(center, chart_bottom - bh - 12, formatter(value), size=15, weight=700, anchor="middle")
+        svg.text(center, chart_bottom + 24, label, size=13, fill=MUTED, anchor="middle")
+
+
+def chart_models(m27, m35_1x, m35_2x):
+    gpu_s = lambda row: n(row, "gpu_count") * n(row, "duration_s") / n(row, "total_generated_tokens") * 1_000_000
+    svg = SVG(1200, 800, "模型与卡数对比", "同为单卡时，3B激活的MoE 35B稠密27B；加第二张卡进一步缩短尾延迟。")
+    title_block(svg, "选对模型，比加一张卡更有效", "300 请求 · 并发 20 · 每请求 4,096 输入 + 1,024 输出 tokens · 左→右：27B×1 · 35B-A3B×1 · 35B-A3B×2")
+    legend(svg, 810, 91, [("27B ×1", TEAL), ("35B-A3B ×1", BLUE), ("35B-A3B ×2", ORANGE)], gap=122)
+
+    tri_bar_panel(svg, 64, 154, 538, 258, "输出吞吐", "tok/s",
+                  [(f"{L27} ×1", n(m27, "output_throughput_tps"), TEAL),
+                   (f"{L35} ×1", n(m35_1x, "output_throughput_tps"), BLUE),
+                   (f"{L35} ×2", n(m35_2x, "output_throughput_tps"), ORANGE)],
+                  lambda v: f"{v:,.0f}")
+    tri_bar_panel(svg, 628, 154, 508, 258, "平均 TTFT", "ms",
+                  [(f"{L27} ×1", n(m27, "ttft_mean_ms"), TEAL),
+                   (f"{L35} ×1", n(m35_1x, "ttft_mean_ms"), BLUE),
+                   (f"{L35} ×2", n(m35_2x, "ttft_mean_ms"), ORANGE)],
+                  lambda v: f"{v:,.0f}")
+    tri_bar_panel(svg, 64, 438, 538, 258, "P99 TTFT", "ms",
+                  [(f"{L27} ×1", n(m27, "ttft_p99_ms"), TEAL),
+                   (f"{L35} ×1", n(m35_1x, "ttft_p99_ms"), BLUE),
+                   (f"{L35} ×2", n(m35_2x, "ttft_p99_ms"), ORANGE)],
+                  lambda v: f"{v:,.0f}")
+    tri_bar_panel(svg, 628, 438, 508, 258, "GPU·秒 / 百万输出 tokens", "资源占用",
+                  [(f"{L27} ×1", gpu_s(m27), TEAL),
+                   (f"{L35} ×1", gpu_s(m35_1x), BLUE),
+                   (f"{L35} ×2", gpu_s(m35_2x), ORANGE)],
+                  lambda v: f"{v:,.0f}")
+    ratio = n(m35_1x, "output_throughput_tps") / n(m27, "output_throughput_tps")
+    svg.text(64, 734, f"单卡选型：35B-A3B 以约 3B 激活参数量，把 27B 稠密模型的输出吞吐提升约 {ratio:.2f}×，首 token 延迟拉低约 2–3 倍。", size=15, fill=INK, weight=600)
+    svg.finish(ASSETS / "model-comparison.svg")
+
+
+def row_for(model: str, gpu_count: int) -> dict[str, str]:
+    for r in ROWS:
+        if r["model"] == model and int(r["gpu_count"]) == gpu_count:
+            return r
+    raise ValueError(f"no row for model={model!r} gpu_count={gpu_count}")
+
+
+def validate(rows: list[dict[str, str]]):
+    for r in rows:
+        assert int(n(r, "total_input_tokens") / n(r, "successful_requests")) == 4096
+        assert int(n(r, "total_generated_tokens") / n(r, "successful_requests")) == 1024
+        assert abs(n(r, "output_throughput_tps") - n(r, "total_generated_tokens") / n(r, "duration_s")) < 0.1
+    single = row_for(MODEL35, 1)
+    dual = row_for(MODEL35, 2)
+    assert abs(pct(n(single, "duration_s"), n(dual, "duration_s")) - (-27.7582)) < 0.01
+    assert abs(pct(n(single, "ttft_p99_ms"), n(dual, "ttft_p99_ms")) - (-70.5547)) < 0.01
+    assert abs((n(dual, "output_throughput_tps") / n(single, "output_throughput_tps") / 2) - 0.6921) < 0.001
+    m27 = row_for(MODEL27, 1)
+    assert abs(n(single, "output_throughput_tps") / n(m27, "output_throughput_tps") - 2.1609) < 0.02
 
 
 ROWS = load_rows()
 
 
 def main():
-    single, dual = ROWS
-    validate(single, dual)
-    chart_throughput(single, dual)
-    chart_latency(single, dual)
-    chart_efficiency(single, dual)
-    chart_speculative(single, dual)
-    print("Generated 4 SVG charts in assets/; all numerical checks passed.")
+    a = row_for(MODEL35, 1)   # 35B-A3B, single card
+    b = row_for(MODEL35, 2)   # 35B-A3B, dual card
+    m27 = row_for(MODEL27, 1)  # 27B dense, single card
+    validate(ROWS)
+    chart_throughput(a, b)
+    chart_latency(a, b)
+    chart_efficiency(a, b)
+    chart_speculative(a, b)
+    chart_models(m27, a, b)
+    print("Generated 5 SVG charts in assets/; all numerical checks passed.")
 
 
 if __name__ == "__main__":
